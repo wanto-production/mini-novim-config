@@ -97,9 +97,12 @@ add {
     end,
   },
 }
+
 add 'nvim-telescope/telescope.nvim'
 add 'nvim-telescope/telescope-ui-select.nvim'
 add 'nvim-telescope/telescope-project.nvim'
+add 'debugloop/telescope-undo.nvim'
+add 'nvim-telescope/telescope-fzf-native.nvim'
 
 add 'nvim-lua/plenary.nvim'
 add 'neovim/nvim-lspconfig'
@@ -139,6 +142,7 @@ pcall(function()
   require('telescope').load_extension 'fzf'
   require('telescope').load_extension 'project'
   require('telescope').load_extension 'notify'
+  require('telescope').load_extension 'undo'
 end)
 -- keymaps
 local builtIn = require 'telescope.builtin'
@@ -149,6 +153,7 @@ map({ 'n' }, '<leader>sf', builtIn.find_files, { desc = '[F] files' })
 map({ 'n' }, '<leader>sd', builtIn.diagnostics, { desc = '[F] diagnostic' })
 map({ 'n' }, '<leader>sp', extensions.project.project, { desc = '[F] projects' })
 map({ 'n' }, '<leader>sn', extensions.notify.notify, { desc = '[F] notifications' })
+map({ 'n' }, '<leader>su', extensions.undo.undo, { desc = '[F] undo' })
 
 -- Terminal
 map('t', '<Esc><Esc>', '<C-\\\\><C-n>', { desc = 'Exit terminal mode' })
@@ -175,7 +180,7 @@ map('n', '<leader>e', '<cmd>Oil<CR>', { desc = 'Mini [E]xplorer' }) -- UPDATE
 map('n', '<leader>bd', '<cmd>bdelete<CR>', { desc = 'Buffer [D]elete' })
 map('n', '<leader>bD', '<cmd>bdelete!<CR>', { desc = 'Buffer [D]elete!' })
 map('n', '[b', '<cmd>bprevious<CR>', { desc = 'Prev Buffer' }) -- UPDATE (no BufferLine)
-map('n', ']b', '<cmd>bnext<CR>', { desc = 'Next Buffer' }) -- UPDATE (no BufferLine)
+map('n', ']b', '<cmd>bnext<CR>', { desc = 'Next Buffer' })     -- UPDATE (no BufferLine)
 map('n', '<leader>r', function()
   require('conform').format { async = true, lsp_fallback = true }
 end, { desc = '[F]ormat buffer' })

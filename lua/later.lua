@@ -173,6 +173,14 @@ require('blink.cmp').setup {
   signature = { enabled = true },
 }
 
+require("conform").setup({
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+})
+
 require('mini.diff').setup {
   -- View settings (equivalent to signs)
   view = {
