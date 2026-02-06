@@ -1,0 +1,78 @@
+local function get_pkg_path(pkg, subpath)
+	local base = vim.fn.stdpath("data") .. "/mason/packages/" .. pkg
+	if subpath then
+		base = base .. subpath
+	end
+	return base
+end
+
+local additional_plugins = {
+	{
+		name = "typescript-svelte-plugin",
+		location = get_pkg_path("svelte-language-server", "/node_modules/typescript-svelte-plugin"),
+		enableForWorkspaceTypeScriptVersions = true,
+	},
+	{
+		name = "@astrojs/ts-plugin",
+		location = get_pkg_path("astro-language-server", "/node_modules/@astrojs/ts-plugin"),
+		enableForWorkspaceTypeScriptVersions = true,
+	},
+	{
+		name = "@angular/language-server",
+		location = get_pkg_path("angular-language-server", "/node_modules/@angular/language-server"),
+		enableForWorkspaceTypeScriptVersions = false,
+	},
+	{
+		name = "@vue/typescript-plugin",
+		location = get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+		languages = { "vue" },
+		configNamespace = "typescript",
+		enableForWorkspaceTypeScriptVersions = true,
+	},
+}
+
+return {
+	root_markers = { "package.json" },
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"javascript.jsx",
+		"typescript",
+		"typescriptreact",
+		"typescript.tsx",
+		"vue",
+	},
+	settings = {
+		complete_function_calls = true,
+		vtsls = {
+			enableMoveToFileCodeAction = true,
+			autoUseWorkspaceTsdk = true,
+			experimental = {
+				maxInlayHintLength = 30,
+				completion = {
+					enableServerSideFuzzyMatch = true,
+				},
+			},
+			tsserver = {
+				globalPlugins = additional_plugins,
+			},
+		},
+		typescript = {
+			tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+			updateImportsOnFileMove = {
+				enabled = "always",
+			},
+			suggest = {
+				completeFunctionCalls = true,
+			},
+			inlayHints = {
+				enumMemberValues = { enabled = true },
+				functionLikeReturnTypes = { enabled = true },
+				parameterNames = { enabled = "literals" },
+				parameterTypes = { enabled = true },
+				propertyDeclarationTypes = { enabled = true },
+				variableTypes = { enabled = false },
+			},
+		},
+	},
+}
