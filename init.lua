@@ -65,9 +65,6 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 vim.o.scrolloff = 10
 vim.o.confirm = true
-vim.schedule(function()
-  vim.notify = require('mini.notify').make_notify()
-end)
 
 -- Plugins (FIXED koma)
 local path_package = vim.fn.stdpath 'data' .. '/site/'
@@ -102,6 +99,8 @@ add {
 }
 add 'nvim-telescope/telescope.nvim'
 add 'nvim-telescope/telescope-ui-select.nvim'
+add 'nvim-telescope/telescope-project.nvim'
+
 add 'nvim-lua/plenary.nvim'
 add 'neovim/nvim-lspconfig'
 add 'mason-org/mason.nvim'
@@ -119,6 +118,7 @@ add 'akinsho/bufferline.nvim'
 add 'OXY2DEV/markview.nvim'
 add 'lervag/vimtex'
 add 'vyfor/cord.nvim'
+add 'rcarriga/nvim-notify'
 
 require('mini.deps').now(function()
   require 'now'
@@ -134,12 +134,21 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
   end,
 })
 
+pcall(function()
+  require('telescope').load_extension 'ui-select'
+  require('telescope').load_extension 'fzf'
+  require('telescope').load_extension 'project'
+  require('telescope').load_extension 'notify'
+end)
 -- keymaps
 local builtIn = require 'telescope.builtin'
+local extensions = require('telescope').extensions
 local map = vim.keymap.set
 
 map({ 'n' }, '<leader>sf', builtIn.find_files, { desc = '[F] files' })
 map({ 'n' }, '<leader>sd', builtIn.diagnostics, { desc = '[F] diagnostic' })
+map({ 'n' }, '<leader>sp', extensions.project.project, { desc = '[F] projects' })
+map({ 'n' }, '<leader>sn', extensions.notify.notify, { desc = '[F] notifications' })
 
 -- Terminal
 map('t', '<Esc><Esc>', '<C-\\\\><C-n>', { desc = 'Exit terminal mode' })

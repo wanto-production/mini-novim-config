@@ -5,35 +5,6 @@ require('which-key').setup {
 
 require('mini.icons').mock_nvim_web_devicons()
 require('mini.pairs').setup()
-require('mini.notify').setup {
-  window = {
-    config = {
-      relative = 'editor',
-      anchor = 'SE', -- Bottom-right
-      col = vim.o.columns,
-      row = vim.o.lines - 1, -- ← UBAH: 1 = 1 baris dari atas
-      -- width = 0.6,
-      -- height = 0.2,
-      border = 'rounded',
-    },
-    winblend = 20,
-  },
-  lsp_progress = { enable = true },
-}
-
-require('mini.git').setup()
-require('mason').setup()
-require('conform').setup {
-  format_on_save = {
-    timeout_ms = 500,
-    lsp_format = 'fallback',
-  },
-  formatters_by_ft = {
-    lua = { 'stylua' },
-    vue = { 'prettier' },
-    -- javascript = { "prettierd", "prettier", stop_after_first = true },
-  },
-}
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
@@ -137,7 +108,18 @@ require('oil').setup {
     ['<BS>'] = 'actions.parent',
     ['.'] = 'actions.toggle_hidden',
   },
-
+  git = {
+    -- Return true to automatically git add/mv/rm files
+    add = function(path)
+      return false
+    end,
+    mv = function(src_path, dest_path)
+      return false
+    end,
+    rm = function(path)
+      return false
+    end,
+  },
   -- Floating window (optional, Ctrl+E)
   float = {
     max_width = 0.9,
