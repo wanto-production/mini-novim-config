@@ -100,45 +100,6 @@ require('markview').setup {
   conceal = true,
 }
 
-require('bufferline').setup {
-  -- Catppuccin integration
-  highlights = require('catppuccin.special.bufferline').get_theme(),
-
-  options = {
-    -- OIL PERFORMANCE FIX (no diagnostics lag)
-    diagnostics = 'nvim_lsp',
-
-    -- Icons via mini.icons
-    get_element_icon = function(element)
-      if element.filetype ~= '' then
-        local icon, hl = require('mini.icons').get('filetype', element.filetype)
-        return icon, hl
-      elseif element.path ~= '' then
-        local icon, hl = require('mini.icons').get('file', element.path)
-        return icon, hl
-      end
-      return '', ''
-    end,
-
-    mode = 'buffers',
-    numbers = 'ordinal',
-    show_buffer_icons = true,
-    show_close_icon = false,
-    show_buffer_close_icons = false,
-    always_show_bufferline = true,
-
-    -- OIL OFFSET (highlight + text)
-    offsets = {
-      {
-        filetype = 'oil',
-        text = '📁 FILES',
-        highlight = 'Directory',
-        text_align = 'center',
-        separator = true,
-      },
-    },
-  },
-}
 require('cord').setup {
   editor = {
     client = 'neovim',
