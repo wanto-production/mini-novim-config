@@ -103,6 +103,10 @@ add 'nvim-telescope/telescope-ui-select.nvim'
 add 'nvim-telescope/telescope-project.nvim'
 add 'debugloop/telescope-undo.nvim'
 add 'nvim-telescope/telescope-fzf-native.nvim'
+add({
+  source = 'isak102/telescope-git-file-history.nvim',
+  depends = { 'tpope/vim-fugitive' }
+})
 
 add 'nvim-lua/plenary.nvim'
 add 'neovim/nvim-lspconfig'
@@ -143,17 +147,72 @@ pcall(function()
   require('telescope').load_extension 'project'
   require('telescope').load_extension 'notify'
   require('telescope').load_extension 'undo'
+  require('telescope').load_extension('gh')
+  require('telescope').load_extension('git_file_history')
 end)
 -- keymaps
-local builtIn = require 'telescope.builtin'
-local extensions = require('telescope').extensions
 local map = vim.keymap.set
+local builtin = require 'telescope.builtin'
+local extensions = require('telescope').extensions
 
-map({ 'n' }, '<leader>sf', builtIn.find_files, { desc = '[F] files' })
-map({ 'n' }, '<leader>sd', builtIn.diagnostics, { desc = '[F] diagnostic' })
+-- Telescope
+map({ 'n' }, '<leader>sf', builtin.find_files, { desc = '[F] files' })
+map({ 'n' }, '<leader>sd', builtin.diagnostics, { desc = '[F] diagnostic' })
 map({ 'n' }, '<leader>sp', extensions.project.project, { desc = '[F] projects' })
 map({ 'n' }, '<leader>sn', extensions.notify.notify, { desc = '[F] notifications' })
 map({ 'n' }, '<leader>su', extensions.undo.undo, { desc = '[F] undo' })
+
+-- =====================================
+-- FILE & SEARCH
+-- =====================================
+map({ 'n' }, '<leader>sg', builtin.live_grep, { desc = '[F] live grep' })
+map({ 'n' }, '<leader>sw', builtin.grep_string, { desc = '[F] word under cursor' })
+map({ 'n' }, '<leader>sr', builtin.oldfiles, { desc = '[F] recent files' })
+map({ 'n' }, '<leader>sb', builtin.buffers, { desc = '[F] buffers' })
+map({ 'n' }, '<leader>sh', builtin.help_tags, { desc = '[F] help tags' })
+map({ 'n' }, '<leader>sk', builtin.keymaps, { desc = '[F] keymaps' })
+map({ 'n' }, '<leader>sc', builtin.commands, { desc = '[F] commands' })
+map({ 'n' }, '<leader>sm', builtin.marks, { desc = '[F] marks' })
+map({ 'n' }, '<leader>sj', builtin.jumplist, { desc = '[F] jumplist' })
+map({ 'n' }, '<leader>sq', builtin.quickfix, { desc = '[F] quickfix' })
+
+-- =====================================
+-- GIT
+-- =====================================
+map({ 'n' }, '<leader>sgc', builtin.git_commits, { desc = '[G] commits' })
+map({ 'n' }, '<leader>sgC', builtin.git_bcommits, { desc = '[G] buffer commits' })
+map({ 'n' }, '<leader>sgb', builtin.git_branches, { desc = '[G] branches' })
+map({ 'n' }, '<leader>sgs', builtin.git_status, { desc = '[G] status' })
+map({ 'n' }, '<leader>sgS', builtin.git_stash, { desc = '[G] stash' })
+map({ 'n' }, '<leader>sgf', builtin.git_files, { desc = '[G] files' })
+map('n', '<leader>sgh', '<cmd>Telescope git_file_history<cr>', { desc = '[G] file history' })
+
+-- =====================================
+-- LSP
+-- =====================================
+map({ 'n' }, '<leader>slr', builtin.lsp_references, { desc = '[L] references' })
+map({ 'n' }, '<leader>sld', builtin.lsp_definitions, { desc = '[L] definitions' })
+map({ 'n' }, '<leader>slt', builtin.lsp_type_definitions, { desc = '[L] type definitions' })
+map({ 'n' }, '<leader>sli', builtin.lsp_implementations, { desc = '[L] implementations' })
+map({ 'n' }, '<leader>sls', builtin.lsp_document_symbols, { desc = '[L] document symbols' })
+map({ 'n' }, '<leader>slw', builtin.lsp_workspace_symbols, { desc = '[L] workspace symbols' })
+
+-- =====================================
+-- MISC
+-- =====================================
+map({ 'n' }, '<leader>s/', builtin.current_buffer_fuzzy_find, { desc = '[F] current buffer' })
+map({ 'n' }, '<leader>s:', builtin.command_history, { desc = '[F] command history' })
+map({ 'n' }, '<leader>s;', builtin.search_history, { desc = '[F] search history' })
+map({ 'n' }, '<leader>sR', builtin.resume, { desc = '[F] resume last picker' })
+map({ 'n' }, '<leader>sC', builtin.colorscheme, { desc = '[F] colorscheme' })
+map({ 'n' }, '<leader>sH', builtin.highlights, { desc = '[F] highlights' })
+map({ 'n' }, '<leader>sA', builtin.autocommands, { desc = '[F] autocommands' })
+map({ 'n' }, '<leader>sO', builtin.vim_options, { desc = '[F] vim options' })
+
+-- Find files including hidden/ignored
+map({ 'n' }, '<leader>sF', function()
+  builtin.find_files({ hidden = true, no_ignore = true })
+end, { desc = '[F] all files (hidden)' })
 
 -- Terminal
 map('t', '<Esc><Esc>', '<C-\\\\><C-n>', { desc = 'Exit terminal mode' })
