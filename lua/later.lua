@@ -123,7 +123,7 @@ require('cord').setup {
 
 require('toggleterm').setup {
   open_mapping = [[<leader>tt]], -- Ctrl+\ toggle
-  direction = 'float', -- floating window
+  direction = 'float',           -- floating window
   float_opts = {
     border = 'curved',
     winblend = 0,
@@ -133,7 +133,7 @@ require('toggleterm').setup {
 
 require('noice').setup {
   lsp = {
-    progress = { enabled = true},
+    progress = { enabled = true },
     override = {
       ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
       ['vim.lsp.util.stylize_markdown'] = true,
@@ -221,7 +221,7 @@ require('mini.diff').setup {
   options = {
     algorithm = 'histogram', -- 'myers' | 'minimal' | 'patience' | 'histogram'
     indent_heuristic = true,
-    linematch = 60, -- Performance optimization
+    linematch = 60,          -- Performance optimization
     wrap_goto = false,
   },
 }

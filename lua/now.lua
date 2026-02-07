@@ -6,6 +6,7 @@ require('which-key').setup {
 require('mini.icons').mock_nvim_web_devicons()
 require('mini.pairs').setup()
 
+require('mason').setup()
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
     'regex',
@@ -63,6 +64,14 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+require('notify').setup {
+  stages = 'fade_in_slide_out', -- fade_in_slide_out, fade, slide, static
+  timeout = 3000,               -- milliseconds
+  background_colour = '#000000',
+  top_down = true,
+    render = 'compact',
+}
+
 require('oil').setup {
   -- Core
   default_file_explorer = true,
@@ -73,7 +82,7 @@ require('oil').setup {
   columns = {
     'icon',
     { 'permissions', max_width = 12 },
-    { 'size', max_width = 8 },
+    { 'size',        max_width = 8 },
     'mtime',
   },
 
@@ -183,9 +192,9 @@ require('catppuccin').setup {
   },
   color_overrides = {
     mocha = {
-      base = '#11151c', -- blue-black base
+      base = '#11151c',   -- blue-black base
       mantle = '#0e1117', -- dark blue-black
-      crust = '#0a0d12', -- darkest
+      crust = '#0a0d12',  -- darkest
       text = '#c9d1d9',
       subtext1 = '#b1bac4',
       subtext0 = '#8b949e',
