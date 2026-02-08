@@ -43,7 +43,11 @@ return {
     config = function()
       require('telescope').setup {
         extensions = {
-          project = {}
+          project = {
+            search_dirs = {
+              "~/projects",
+            },
+          }
         }
       }
       pcall(require('telescope').load_extension, 'project')

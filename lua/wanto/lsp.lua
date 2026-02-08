@@ -1,1 +1,1 @@
-vim.lsp.enable { 'lua_ls', 'svelte', 'vtsls', 'tailwindcss', 'nixd' }
+vim.lsp.enable { 'lua_ls', 'svelte', 'vtsls', 'tailwindcss', 'nixd','marksman' }
