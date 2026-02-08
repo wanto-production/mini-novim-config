@@ -156,9 +156,10 @@ return {
   {
     'akinsho/toggleterm.nvim',
     cmd = 'ToggleTerm',
+    event = 'VeryLazy',
     config = function()
       require('toggleterm').setup {
-        open_mapping = [[<leader>tt]], -- Ctrl+\ toggle
+        open_mapping = [[<leader>tt]],
         direction = 'float',     -- floating window
         float_opts = {
           border = 'curved',

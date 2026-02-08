@@ -63,7 +63,6 @@ map({ 'n' }, '<leader>sF', function()
 end, { desc = '[F] all files (hidden)' })
 
 -- Terminal
-map('t', '<Esc><Esc>', '<C-\\\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Insert
 map('i', '<A-Up>', '<Esc>:m .-2<CR>==gi', { desc = 'Move line up', silent = true })
@@ -93,6 +92,7 @@ map('n', '<leader>r', function()
 end, { desc = '[F]ormat buffer' })
 
 -- Mixed
+map({ 'n', 'i' }, '<leader>tt', ':ToggleTerm<CR>', { desc = "[T] term" })
 map({ 'n', 'v' }, 'd', '"_d')
 map({ 'n', 'i', 'v' }, '<C-s>', function()
   if vim.bo.modified then

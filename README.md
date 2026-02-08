@@ -4,7 +4,7 @@ This is a personal Neovim configuration that uses the `mini.nvim` framework. It'
 
 ## Features
 
-- **Plugin Management**: Uses `mini.deps` for managing plugins.
+- **Plugin Management**: Uses `lazy.nvim` for managing plugins.
 - **LSP**: Configured with `nvim-lspconfig` for language-specific features.
 - **Completion**: Basic completion setup.
 - **UI**: Customized with `lualine` and `catppuccin`.
