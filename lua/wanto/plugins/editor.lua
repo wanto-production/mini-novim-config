@@ -5,6 +5,7 @@ return {
   {
     'stevearc/oil.nvim',
     cmd = 'Oil',
+    event = "VimEnter",
     config = function()
       require('oil').setup {
         -- Core
