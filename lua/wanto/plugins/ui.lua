@@ -245,7 +245,7 @@ return {
       local notify = require('notify')
 
       notify.setup({
-        stages = 'fade_in_slide_out', -- fade_in_slide_out, fade, slide, static
+        stages = 'slide', -- fade_in_slide_out, fade, slide, static
         timeout = 3000,               -- milliseconds
         background_colour = '#000000',
         top_down = true,
