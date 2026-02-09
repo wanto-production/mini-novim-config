@@ -1,3 +1,4 @@
+require('wanto.core.autocms')
 require('wanto.core.options')
 require('wanto.lazy')
 vim.schedule(function()

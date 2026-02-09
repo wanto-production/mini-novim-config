@@ -19,9 +19,9 @@ return {
     build = ':MasonUpdate',
     config = function()
       require('mason').setup({
-      ui = {
-        border = 'rounded',
-      }
+        ui = {
+          border = 'rounded',
+        }
       })
     end
   },
@@ -36,21 +36,20 @@ return {
       'L3MON4D3/LuaSnip',
     },
     version = '*',
-    config=function()
+    config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-vim.lsp.config('*', { capabilities = capabilities })
-require('blink.cmp').setup {
-  keymap = { ['<CR>'] = { 'accept', 'fallback' } },
-  appearance = { nerd_font_variant = 'mono' },
-  completion = {
-    documentation = { auto_show = true, window = { border = 'single' } },
-    menu = { border = 'single' },
-  },
-  sources = { default = { 'lsp', 'path' } },
-  fuzzy = { implementation = 'lua' },
-  signature = { enabled = true },
-}
-
+      vim.lsp.config('*', { capabilities = capabilities })
+      require('blink.cmp').setup {
+        keymap = { ['<CR>'] = { 'accept', 'fallback' } },
+        appearance = { nerd_font_variant = 'mono' },
+        completion = {
+          documentation = { auto_show = true, window = { border = 'single' } },
+          menu = { border = 'single' },
+        },
+        sources = { default = { 'lsp', 'path' } },
+        fuzzy = { implementation = 'lua' },
+        signature = { enabled = true },
+      }
     end
   },
 
@@ -70,14 +69,14 @@ require('blink.cmp').setup {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
-    config = function ()      
-require("conform").setup({
-  format_on_save = {
-    -- These options will be passed to conform.format()
-    timeout_ms = 500,
-    lsp_format = "fallback",
-  },
-})
+    config = function()
+      require("conform").setup({
+        format_on_save = {
+          -- These options will be passed to conform.format()
+          timeout_ms = 500,
+          lsp_format = "fallback",
+        },
+      })
     end
   },
 }
