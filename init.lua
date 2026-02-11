@@ -1,7 +1,7 @@
 require('wanto.core.autocms')
 require('wanto.core.options')
 require('wanto.lazy')
+require('wanto.lsp')
 vim.schedule(function()
   require('wanto.core.keymaps')
 end)
-require('wanto.lsp')

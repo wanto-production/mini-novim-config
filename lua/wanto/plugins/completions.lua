@@ -4,19 +4,11 @@ return {
   -- ============================================================================
   {
     'neovim/nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'mason-org/mason.nvim',
-    },
-    config = function()
-      -- LSP config here
-    end
+    event = { 'BufReadPre', 'BufNewFile' }, -- ⚡ KUNCI: Event yang tepat
   },
 
   {
     'mason-org/mason.nvim',
-    cmd = 'Mason',
-    build = ':MasonUpdate',
     config = function()
       require('mason').setup({
         ui = {
