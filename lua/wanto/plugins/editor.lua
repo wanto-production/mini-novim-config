@@ -3,76 +3,57 @@ return {
   -- FILE EXPLORER
   -- ============================================================================
   {
-    'stevearc/oil.nvim',
-    cmd = 'Oil',
-    event = "VimEnter",
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
     config = function()
-      require('oil').setup {
-        -- Core
-        default_file_explorer = true,
-        restore_win_view_on_close = true,
-        delete_to_trash = vim.fn.has 'macunix' == 1, -- NixOS = false
-
-        -- Columns (NixOS optimized)
-        columns = {
-          'icon',
-          { 'permissions', max_width = 12 },
-          { 'size',        max_width = 8 },
-          'mtime',
+      require('neo-tree').setup {
+        use_popups_for_input = false,
+        close_if_last_window = false,
+        enable_git_status = true,
+        enable_diagnostics = true,
+        sources = {
+          'filesystem',
+          'buffers',
+          'git_status',
         },
-
-        -- Buffer settings (performance)
-        buf_options = {
-          buflisted = false,
-          bufhidden = 'hide',
-          filetype = 'oil',
+        source_selector = {
+          winbar = true,
+          statusline = false,
+          tabs = {
+            { source = 'filesystem', display_name = ' 󰉋 Files ' },
+            { source = 'buffers', display_name = ' 󰈚 Buffers ' },
+            { source = 'git_status', display_name = ' 󰊢 Git ' },
+          },
         },
-
-        -- Window settings (minimalist)
-        win_options = {
-          wrap = false,
-          signcolumn = 'no',
-          cursorcolumn = false,
-          foldcolumn = '0',
-          spell = false,
-          list = false,
+        window = {
+          position = 'right',
+          width = 30,
+          mappings = {
+            ['<tab>'] = 'next_source',
+            ['<s-tab>'] = 'prev_source',
+          },
         },
-
-        -- View config (git integration)
-        view_options = {
-          show_hidden = true, -- .git, .nix → visible
+        default_component_configs = {
+          indent = {
+            with_markers = true,
+            indent_marker = '│',
+            last_indent_marker = '└',
+            indent_size = 2,
+          },
         },
-
-        -- Keymaps tambahan (poweruser)
-        keymaps = {
-          ['g?'] = 'actions.show_help',
-          ['<CR>'] = 'actions.select',
-          ['<C-s>'] = 'actions.select_vsplit',
-          ['-'] = 'actions.preview',
-          ['<BS>'] = 'actions.parent',
-          ['.'] = 'actions.toggle_hidden',
-        },
-        git = {
-          -- Return true to automatically git add/mv/rm files
-          add = function(path)
-            return false
-          end,
-          mv = function(src_path, dest_path)
-            return false
-          end,
-          rm = function(path)
-            return false
-          end,
-        },
-        -- Floating window (optional, Ctrl+E)
-        float = {
-          max_width = 0.9,
-          max_height = 0.9,
-          border = 'rounded',
-          win_options = { winblend = 10 },
+        filesystem = {
+          follow_current_file = {
+            enabled = true,
+          },
+          use_libuv_file_watcher = true,
+          filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            hide_gitignored = false,
+          },
         },
       }
-    end
+    end,
   },
 
   -- ============================================================================
@@ -160,7 +141,7 @@ return {
     config = function()
       require('toggleterm').setup {
         open_mapping = [[<leader>tt]],
-        direction = 'float',     -- floating window
+        direction = 'float', -- floating window
         float_opts = {
           border = 'curved',
           winblend = 0,

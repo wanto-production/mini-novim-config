@@ -9,7 +9,8 @@ return {
     lazy = false,
     config = function()
       require('mini.icons').mock_nvim_web_devicons()
-      require('mini.indentscope').setup()
+      require('mini.bufremove').setup()
+      -- require('mini.indentscope').setup()
       require('mini.pairs').setup()
       require('mini.diff').setup {
         -- View settings (equivalent to signs)
