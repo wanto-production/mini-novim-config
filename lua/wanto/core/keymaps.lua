@@ -83,8 +83,16 @@ map('n', '<A-Up>', ':m .-2<CR>==', { desc = 'Move line up', silent = true })
 map('n', '<A-Down>', ':m .+1<CR>==', { desc = 'Move line down', silent = true })
 map('n', 'D', '"_D')
 map('n', '<leader>e', '<cmd>Neotree toggle<CR>', { desc = '[E]xplorer' }) -- UPDATE
-map('n', '<leader>bd', '<cmd>bdelete<CR>', { desc = 'Buffer [D]elete' })
-map('n', '<leader>bD', '<cmd>bdelete!<CR>', { desc = 'Buffer [D]elete!' })
+map('n', '<leader>xx', function()
+  require('trouble').toggle { mode = 'diagnostics' }
+end, { desc = 'Diagnostics (Trouble)' })
+
+map('n', '<leader>bd', function()
+  MiniBufremove.delete()
+end, { desc = 'Buffer [D]elete' })
+map('n', '<leader>bD', function()
+  MiniBufremove.wipeout()
+end, { desc = 'Buffer [D]elete!' })
 map('n', '[b', '<cmd>bprevious<CR>', { desc = 'Prev Buffer' }) -- UPDATE (no BufferLine)
 map('n', ']b', '<cmd>bnext<CR>', { desc = 'Next Buffer' })     -- UPDATE (no BufferLine)
 map('n', '<leader>r', function()

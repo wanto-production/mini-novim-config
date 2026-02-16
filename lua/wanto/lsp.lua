@@ -3,4 +3,4 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
   { focusable = false }
 )
 
-vim.lsp.enable { 'lua_ls', 'svelte', 'vtsls', 'tailwindcss', 'nixd', 'marksman' }
+vim.lsp.enable { 'lua_ls', 'svelte', 'vtsls', 'tailwindcss', 'nixd', 'marksman', 'basedpyright', 'vue_ls' }
