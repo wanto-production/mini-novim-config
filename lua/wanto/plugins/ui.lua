@@ -10,6 +10,27 @@ return {
     cmd = 'Telescope',
     config = function()
       local telescope = require('telescope')
+      local colors = require("catppuccin.palettes").get_palette()
+
+      local TelescopeColor = {
+        TelescopeMatching = { fg = colors.flamingo },
+        TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+
+        TelescopePromptPrefix = { bg = colors.surface0 },
+        TelescopePromptNormal = { bg = colors.surface0 },
+        TelescopeResultsNormal = { bg = colors.mantle },
+        TelescopePreviewNormal = { bg = colors.mantle },
+        TelescopePromptBorder = { bg = colors.surface0, fg = colors.lavender },
+        TelescopeResultsBorder = { bg = colors.mantle, fg = colors.lavender },
+        TelescopePreviewBorder = { bg = colors.mantle, fg = colors.lavender },
+        TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
+        TelescopeResultsTitle = { bg = colors.lavender, fg = colors.mantle },
+        TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+      }
+
+      for hl, col in pairs(TelescopeColor) do
+        vim.api.nvim_set_hl(0, hl, col)
+      end
 
       telescope.setup {
         defaults = {
@@ -243,15 +264,13 @@ return {
     event = 'VeryLazy',
     config = function()
       local notify = require('notify')
-
       notify.setup({
-        stages = 'slide', -- fade_in_slide_out, fade, slide, static
-        timeout = 3000,   -- milliseconds
+        stages = 'slide',
+        timeout = 3000,
         background_colour = '#000000',
-        top_down = true,
         render = 'compact',
+        position = 'top_left', -- Pastikan ada spasi, bukan "top_left"
       })
-
       vim.notify = notify
 
       -- Load telescope extension
@@ -335,11 +354,15 @@ return {
         },
         integrations = {
           -- snacks (kalau ada), fallback aman
+          neotree = true,
+          noice = true,
+          notify = true,
           treesitter = true,
           native_lsp = true,
           lsp_trouble = true,
           mason = true,
-          telescope = true,
+          telescope = { enabled = true },
+          which_key = true,
           dap = { enabled = true, enable_ui = true },
         },
       }

@@ -1,5 +1,7 @@
 return {
   -- Dependencies
+  { "nvzone/volt",           lazy = true },
+  { "nvzone/menu",           lazy = true },
   { 'nvim-lua/plenary.nvim', lazy = true },
   { 'MunifTanjim/nui.nvim',  lazy = true },
   { 'tpope/vim-fugitive',    cmd = 'Git' },
