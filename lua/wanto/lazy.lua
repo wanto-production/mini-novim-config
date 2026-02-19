@@ -20,5 +20,5 @@ require('lazy').setup {
     { import = 'wanto.plugins' },
   },
   install = { colorscheme = { 'catppuccin' } },
-  checker = { enabled = true },
+  checker = { enabled = false },
 }

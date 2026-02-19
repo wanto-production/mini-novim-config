@@ -98,6 +98,9 @@ map('n', ']b', '<cmd>bnext<CR>', { desc = 'Next Buffer' })     -- UPDATE (no Buf
 map('n', '<leader>r', function()
   require('conform').format { async = true, lsp_fallback = true }
 end, { desc = '[F]ormat buffer' })
+map("n", "<C-t>", function()
+  require("menu").open("default", { border = true })
+end, {})
 
 -- Mixed
 map({ "n", "v" }, "<RightMouse>", function()
@@ -109,7 +112,7 @@ map({ "n", "v" }, "<RightMouse>", function()
   local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
   local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
 
-  require("menu").open(options, { mouse = true })
+  require("menu").open(options, { mouse = true, border = true })
 end, {})
 map({ 'n', 'i' }, '<leader>tt', ':ToggleTerm<CR>', { desc = "[T] term" })
 map({ 'n', 'v' }, 'd', '"_d')
