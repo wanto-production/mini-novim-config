@@ -5,6 +5,16 @@ return {
   {
     "nvzone/minty",
     cmd = { "Shades", "Huefy" },
+    config = function()
+      require('minty').setup({
+        huefy = {
+          border = true
+        },
+        shades = {
+          border = true
+        }
+      })
+    end
   },
   { 'nvim-lua/plenary.nvim', lazy = true },
   { 'MunifTanjim/nui.nvim',  lazy = true },
